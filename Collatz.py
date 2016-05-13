@@ -52,10 +52,11 @@ while repeat == True:
             print("That is not a natural number")#shows if not an integer
     run = 0 #starts a counter to show number of steps to reach 1
     while N!=1: #starts collatz sequence, continues until 1 is reached
-        print(N)
+        
         N = Collatz(N)
+        print(str(N)+',', end=' ')
         run+=1
-    print(N)
+    #print(N)
     print("It took %i steps to complete the sequence"%(run)) #prints the number of steps
     repeatTest = True
     while repeatTest == True: #asks if you want to repeat the collatz sequence
