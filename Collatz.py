@@ -37,8 +37,8 @@ repeat = True
 #This starts the actual sequencing program, which will repeat until quitted
 while repeat == True:
     print("Please type in a natural number:(eg, 7, not 'seven')") #asks for a number
-    checker = 0
-    while checker==0:
+    checker = False
+    while checker==False:
     
         try:
             N = int(input()) #Gets number from user
@@ -47,9 +47,9 @@ while repeat == True:
             elif N<0:
                 print("That is not a natural (non-negative) number")#checks negativec
             else:
-                checker =1
+                checker = True
         except:
-            print("That is not a natural number")#shows if not an integer
+            print("That is not a natural number (Remember, '7', not 'seven'")#shows if not an integer
     run = 0 #starts a counter to show number of steps to reach 1
     while N!=1: #starts collatz sequence, continues until 1 is reached
         
@@ -57,7 +57,7 @@ while repeat == True:
         print(str(N)+',', end=' ')
         run+=1
     #print(N)
-    print("It took %i steps to complete the sequence"%(run)) #prints the number of steps
+    print("\n It took %i steps to complete the sequence"%(run)) #prints the number of steps
     repeatTest = True
     while repeatTest == True: #asks if you want to repeat the collatz sequence
         print("Would you like to repeat this? (y/n)")
