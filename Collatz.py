@@ -1,3 +1,5 @@
+import time
+
 def Collatz(N):
     '''
     This method produces the next number in a collatz sequence.
@@ -21,10 +23,15 @@ while checker==0:
     knowledge = input()
     if knowledge == 'n': #Explains rules
         print("The rules are simple:")
+        time.sleep(1)
         print("Pick a natural number (non-zero, non-negative integer)")
+        time.sleep(1)
         print("If the number is even, divide it by two")
+        time.sleep(1)
         print("If the number is odd, multiply it by three and add one")
+        time.sleep(1)
         print("Now take this new number, and repeat the process.")
+        time.sleep(1)
         print("Do this long enough, and you will get to one. \n")
         checker = 1
     elif knowledge == 'y': #Skips and compliments
@@ -56,7 +63,7 @@ while repeat == True:
         N = Collatz(N)
         print(str(N)+',', end=' ')
         run+=1
-    #print(N)
+    time.sleep(1)
     print("\n It took %i steps to complete the sequence"%(run)) #prints the number of steps
     repeatTest = True
     while repeatTest == True: #asks if you want to repeat the collatz sequence
