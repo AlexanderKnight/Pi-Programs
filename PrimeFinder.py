@@ -12,7 +12,7 @@ while test == False:
         print("That is not right")
     if number <= 0:
         print("Please give me a positive integer")
-    elif number//1 != 0:
+    elif number%1 != 0:
         print("Please give me an integer")
 primelist = primes.primeFinder(number)
 #print(primes.primeFinder(number))
