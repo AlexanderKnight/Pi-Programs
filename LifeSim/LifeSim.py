@@ -10,14 +10,34 @@ import matplotlib.animation as animation
 import random
 
 
-class Animal:
+class Organism:
+    
+    def __init__(self, grid=10, x, y):
+        
+        self.grid = grid
+        self.x = x
+        self.y = y
+        if self.x ==0 and self.y ==0:
+            self.neighbor = {0:[0,1],1:[1,1],2:[1,0]}
+        elif self.x==0 and self.y !=0 and self.y != self.grid:
+            self.neighbor = {0:[0,1],1:[1,1],2:[1,0],3:[1,-1],4:[0,-1]}
+        elif self.x ==0 and self.y ==self.grid:
+            self.neighbor = {0:[1,0],1:[1,-1],2:[0,-1]}
+        elif self.x !=0 and self.x !=self.grid and self.y ==9:
+            self.neighbor = {0:[1,0],1:[1,-1],2:[0,-1],3:[-1,-1],4:[-1,0]}
+        elif self.x ==9 and self.y ==9:
+            self.neighbor = {0:[0,-1],1:[-1,-1],2:[-1,0]}
+        
+class Animal(Organism):
     '''
     class for general animal
     '''
     
     def __init__(self, size=10.0, walk=2.0, run=10.0, \
     energyTotal=100.0, energy = 100.0, walkEn=0.2, runEn=1.0, \
-    lifespan=500, life= 500, x=0, y=0, inHeat=False):
+    lifespan=500, life= 500, x=0, y=0, grid = 10, inHeat=False):
+        
+        Organism.__init__(self,grid,x,y)
         
         self.size = np.random.normal(size) #How large it is
         self.walk = np.random.normal(walk) #How fast is can walk
@@ -28,8 +48,6 @@ class Animal:
         self.runEn = np.random.normal(runEn) #How much energy is takes to run one step
         self.lifespan = np.random.normal(lifespan) #How long it will live
         self.life = np.random.normal(life) #How many time steps it has
-        self.x = x #It's x axis position
-        self.y = y #It's y axis position
         self.inHeat = inHeat #if it is in heat and willing to breed
     
     def move(self, x=0, y=0, isRunning = False):
@@ -66,12 +84,11 @@ class Animal:
         
     def eat(self,food):
         self.energy += (food.life/food.lifetime)*food.size
-        if self.energy > self.energyTotal:
-            self.energy = self.energyTotal
+        self.energy = np.min(self.energy, self.energyTotal)
         
         
         
-class Plant:
+class Plant(Organism):
     '''
     class for general plant 
     '''
@@ -88,8 +105,7 @@ class Plant:
     def grow(self):
         if self.size < self.maxSize:
             self.size += np.random.random()
-            if self.size > self.maxSize:
-                self.size = self.maxSize
+            self.size = np.min(self.size, self.maxSize)
                 
     def spread(self):
         newPlant = type(self)()
