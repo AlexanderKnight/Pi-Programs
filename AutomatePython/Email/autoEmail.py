@@ -24,7 +24,7 @@ def autoEmail(target, subject, body):
             smtpObj.quit()
             repeat = False
         except:
-            print("I am trying to email %s with subject '%s' and body '%s'."%(target, subject, body))
+            print("I am trying to email %s with subject %s and body %s."%(target, subject, body))
             print("Something went wrong. Should I try again? (y/n)")
             answer = input()
             if answer =='n' or answer =='N' or answer =='no' or answer =='No' or answer =='NO':
