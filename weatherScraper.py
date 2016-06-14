@@ -14,10 +14,11 @@ weather = soup.select('#detailed-forecast-body > .row.row-odd.row-forecast > .co
 todayWeather = weather[0].getText()
 
 precipRegex = re.compile(r'Chance of precipitation is \d\d%')
-
-precipChance = precipRegex.search(todayWeather).group()
-if precipChance:
-    textMyself.textmyself(precipChance)
-else:
+try:
+    precipChance = precipRegex.search(todayWeather).group()
+    if precipChance:
+        textMyself.textmyself(precipChance)
+    else:
+        textMyself.textmyself('No rain today')
+except:
     textMyself.textmyself('No rain today')
-
