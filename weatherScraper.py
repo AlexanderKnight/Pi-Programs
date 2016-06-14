@@ -9,7 +9,7 @@ r = urllib.request.urlopen('http://forecast.weather.gov/MapClick.php?lat=43.6650
 soup = bs4.BeautifulSoup(r, 'html5lib')
 
 
-#weather = soup.find_all('div', class_='col-sm-10 forecast-text')
+
 weather = soup.select('#detailed-forecast-body > .row.row-odd.row-forecast > .col-sm-10.forecast-text')
 todayWeather = weather[0].getText()
 
