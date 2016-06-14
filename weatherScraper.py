@@ -1,6 +1,5 @@
 #! /usr/bin/python3
 # weatherScraper.py
-
 import bs4
 import urllib
 import re
@@ -10,13 +9,15 @@ r = urllib.request.urlopen('http://forecast.weather.gov/MapClick.php?lat=43.6650
 soup = bs4.BeautifulSoup(r, 'html5lib')
 
 
+#weather = soup.find_all('div', class_='col-sm-10 forecast-text')
 weather = soup.select('#detailed-forecast-body > .row.row-odd.row-forecast > .col-sm-10.forecast-text')
 todayWeather = weather[0].getText()
 
 precipRegex = re.compile(r'Chance of precipitation is \d\d%')
 
 precipChance = precipRegex.search(todayWeather).group()
-
-textMyself.textmyself(precipChance)
-
+if precipChance:
+    textMyself.textmyself(precipChance)
+else:
+    textMyself.textmyself('No rain today')
 
